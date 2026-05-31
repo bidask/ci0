@@ -1,0 +1,30 @@
+name: React Test CI
+# どんな時にロボットが動くか（プルリクエストが作られた時）
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    # ロボットが使うパソコン（Linux）
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. GitHubからコードをロボットのパソコンに持ってくる
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. ロボットのパソコンにNode.js（バージョン20）をセットアップする
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    # 3. 必要な部品（Reactなど）をインストールする
+    - name: Install dependencies
+      run: npm ci
+
+    # 4. 自動テストを実行する！
+    - name: Run test
+      run: npm test
