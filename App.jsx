@@ -1,3 +1,3 @@
 export default function App() {
-  return <h1>こにちは！</h1>;
+  return <h1>こんにちは！</h1>;
 }
